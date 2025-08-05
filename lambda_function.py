@@ -1,7 +1,8 @@
 import boto3
+import json
 from anthropic import Anthropic
 from botocore.exceptions import ClientError
-import json
+
 
 def get_secret():
 
