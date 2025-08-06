@@ -29,7 +29,7 @@ def get_secret():
 
 secret_key = get_secret()
 
-#create anthropic session
+# create anthropic session
 client = Anthropic(
     api_key=(secret_key),
 )
@@ -53,6 +53,7 @@ def lambda_handler(event, context):
     )
     message_input_cost = round(message.usage.input_tokens * 0.0003, 5)
     message_output_cost = round(message.usage.output_tokens * 0.0015, 5)
+    
     # get response text
     claude_response = message.content[0].text
     
