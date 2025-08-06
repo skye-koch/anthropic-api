@@ -29,6 +29,7 @@ def get_secret():
 
 secret_key = get_secret()
 
+#create anthropic session
 client = Anthropic(
     api_key=(secret_key),
 )
