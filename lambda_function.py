@@ -67,7 +67,7 @@ def lambda_handler(event, context):
     message_history.append(claude_message)
 
     #create response to send to user
-    response = {a
+    response = {
         "conversation_id": conversation_id,
         "body": claude_response,
         
