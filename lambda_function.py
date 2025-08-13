@@ -36,8 +36,9 @@ client = Anthropic(
 def lambda_handler(event, context):
 
 
-    conversation_id = None
+    conversation_id = event["conversation_id"]
     message_history = []
+
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     table = dynamodb.Table('message-history')
 
@@ -66,8 +67,10 @@ def lambda_handler(event, context):
     message_history.append(claude_message)
 
     #create response to send to user
-    response = {
-        "body": claude_response
+    response = {a
+        "conversation_id": conversation_id,
+        "body": claude_response,
+        
     }
 
     # write response data to DDB table
