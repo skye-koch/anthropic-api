@@ -35,15 +35,14 @@ client = Anthropic(
 
 def lambda_handler(event, context):
 
-
-    conversation_id = event["conversation_id"]
+    conversation_id = event.get("conversation_id")
     message_history = []
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     table = dynamodb.Table('message-history')
 
     if conversation_id == None:
-        conversation_id = uuid4()
+        conversation_id = f"{uuid4()}"
     else:
         message_history = get_message_history(conversation_id, table)
     
@@ -75,7 +74,7 @@ def lambda_handler(event, context):
 
     # write response data to DDB table
     ddb_item = {
-        "conversation_id": f"{conversation_id}",
+        "conversation_id": conversation_id,
         "messages": message_history 
     }
 
